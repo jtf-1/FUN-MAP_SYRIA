@@ -43,8 +43,9 @@ end -- function
 ----------------------------------------------------
 
 TableSpawnSupport = { -- {spawnobjectname, spawnzone}
-	{spawnobject = "AR001_KC-135_01", spawnzone = ZONE:New("AR001")},
-	{spawnobject = "AR001_KC-135MPRS_01", spawnzone = ZONE:New("AR001")},
+	{spawnobject = "Tanker_KC135MPRS_Shell1", spawnzone = ZONE:New("AR-5950")},
+	{spawnobject = "Tanker_KC135_Texaco1", spawnzone = ZONE:New("AR-5950")},
+	{spawnobject = "Tanker_C130_Arco1", spawnzone = ZONE:New("AR-5950")},
 	{spawnobject = "AWACS_DARKSTAR", spawnzone = ZONE:New("AWACS")},
 }
 
@@ -180,41 +181,40 @@ end
 -- -- END ACM/BFM SECTION
 
 
--- ADMIN SECTION
+-- -- ADMIN SECTION
 
---SeAdmingGroup = SET_GROUP:New():FilterPrefixes("XX_Test"):FilterStart()
-SetAdminClient = SET_CLIENT:New():FilterStart()
+-- SetAdminClient = SET_CLIENT:New():FilterStart()
 
-local function restartMission()
-	trigger.action.setUserFlag("999", true)
-end
+-- local function restartMission()
+	-- trigger.action.setUserFlag("999", true)
+-- end
 
-local function BuildAdminMenu()
-	SetAdminClient:ForEachClient(function(client)
+-- local function BuildAdminMenu()
+	-- SetAdminClient:ForEachClient(function(client)
 		
-		if (client ~= nil) and (client:IsAlive()) then
-			adminGroup = client:GetGroup()
-			adminGroupName = adminGroup:GetName()
+		-- if (client ~= nil) and (client:IsAlive()) then
+			-- adminGroup = client:GetGroup()
+			-- adminGroupName = adminGroup:GetName()
 
-			env.info("ADMIN Player name: " ..client:GetPlayerName())
-			env.info("ADMIN Group Name: " ..adminGroupName)
+			-- env.info("ADMIN Player name: " ..client:GetPlayerName())
+			-- env.info("ADMIN Group Name: " ..adminGroupName)
 
 			
-			if string.find(adminGroupName, "XX_ADMIN") then
-				adminMenu = MENU_GROUP:New(adminGroup, "ADMIN")
-				MENU_GROUP_COMMAND:New(adminGroup, "Restart Mission", adminMenu, restartMission )
-			end
-		SetAdminClient:Remove(client:GetName(), true)
-		end
-	end)
-	timer.scheduleFunction(BuildAdminMenu, nil, timer.getTime() + 10)
-end
+			-- if string.find(adminGroupName, "XX_ADMIN") then
+				-- adminMenu = MENU_GROUP:New(adminGroup, "ADMIN")
+				-- MENU_GROUP_COMMAND:New(adminGroup, "Restart Mission", adminMenu, restartMission )
+			-- end
+		-- SetAdminClient:Remove(client:GetName(), true)
+		-- end
+	-- end)
+	-- timer.scheduleFunction(BuildAdminMenu, nil, timer.getTime() + 10)
+-- end
 
-if JtfAdmin then
-	env.info("ADMIN enabled")
-	BuildAdminMenu()
-end
+-- if JtfAdmin then
+	-- env.info("ADMIN enabled")
+	-- BuildAdminMenu()
+-- end
 
---END ADMIN SECTION
+-- --END ADMIN SECTION
 
 env.info( '*** JTF-1 MOOSE MISSION SCRIPT END ***' )
