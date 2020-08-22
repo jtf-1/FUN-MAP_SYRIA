@@ -11,7 +11,7 @@ local SA6pc = 20
 local SA2pc = 20
 local SA3pc = 20
 local SA10pc = 20
-local EWRpc = 20
+local EWRpc = 50
 
 --Editable part ^
 
@@ -106,13 +106,13 @@ DetectionSetGroup = SET_GROUP:New()
 DetectionSetGroup:FilterPrefixes("EWR")
 DetectionSetGroup:FilterStart()
 -- Setup the detection and group targets to a 30km range!
-Detection = DETECTION_AREAS:New( DetectionSetGroup, 10000 )
+Detection = DETECTION_AREAS:New( DetectionSetGroup, 30000 )
 -- Setup the A2A dispatcher, and initialize it.
 A2ADispatcher = AI_A2A_DISPATCHER:New( Detection )
 -- Set 100km as the radius to engage any target by airborne friendlies.
 A2ADispatcher:SetEngageRadius(180000) -- 100000 is the default value.
 -- Set 200km as the radius to ground control intercept.
-A2ADispatcher:SetGciRadius(100000) -- 200000 is the default value.
+A2ADispatcher:SetGciRadius(200000) -- 200000 is the default value.
 A2ADispatcher:SetDefaultTakeoffFromParkingCold()
 A2ADispatcher:SetDefaultLandingAtEngineShutdown()
 BorderZone = ZONE_POLYGON:New( "RED-BORDER", GROUP:FindByName( "SyAF-GCI" ) )
@@ -133,6 +133,10 @@ A2ADispatcher:SetSquadronGci( "695 Squadron", 900, 1200 )
 A2ADispatcher:SetSquadron( "Russia GCI", "Bassel Al-Assad", { "Russia GCI" }, 2 ) --su30
 A2ADispatcher:SetSquadronGrouping( "Russia GCI", 2 )
 A2ADispatcher:SetSquadronGci( "Russia GCI", 900, 1200 )
+
+A2ADispatcher:SetSquadron( "Russia CAP", "Bassel Al-Assad", { "Russia CAP" }, 2 ) --mig31
+A2ADispatcher:SetSquadronGrouping( "Russia GCI", 2 )
+A2ADispatcher:SetSquadronGci( "Russia CAP", 900, 1200 )
 
 --A2ADispatcher:SetTacticalDisplay(true)
 A2ADispatcher:Start()
