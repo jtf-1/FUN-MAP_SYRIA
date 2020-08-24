@@ -48,8 +48,9 @@ function SEF_ValidateMission()
 		--TARGET IS NOT STATIC					
 		if ( GROUP:FindByName(AGMissionTarget):IsAlive() == true ) then
 			--GROUP VALID
-			trigger.action.outSound('That Is Our Target.ogg')
-			trigger.action.outText(AGMissionBriefingText,15)			
+			trigger.action.outSound('Background Chatter.ogg')
+			--trigger.action.outSound('That Is Our Target.ogg')
+			trigger.action.outText(AGMissionBriefingText,30)			
 		elseif ( GROUP:FindByName(AGMissionTarget):IsAlive() == false or GROUP:FindByName(AGMissionTarget):IsAlive() == nil ) then
 			--GROUP NOT VALID
 			trigger.action.setUserFlag(ScenarioNumber,4)
@@ -64,8 +65,9 @@ function SEF_ValidateMission()
 		--TARGET IS STATIC		
 		if ( StaticObject.getByName(AGMissionTarget) ~= nil and StaticObject.getByName(AGMissionTarget):isExist() == true ) then
 			--STATIC IS VALID
-			trigger.action.outSound('That Is Our Target.ogg')
-			trigger.action.outText(AGMissionBriefingText,15)								
+			trigger.action.outSound('Background Chatter.ogg')
+			--trigger.action.outSound('That Is Our Target.ogg')
+			trigger.action.outText(AGMissionBriefingText,30)								
 		elseif ( StaticObject.getByName(AGMissionTarget) == nil or StaticObject.getByName(AGMissionTarget):isExist() == false ) then
 			--STATIC TARGET NOT VALID, ASSUME TARGET ALREADY DESTROYED			
 			trigger.action.setUserFlag(ScenarioNumber,4)
@@ -206,6 +208,7 @@ local function CheckObjectiveRequest()
 	
 	if ( AGMissionBriefingText ~= nil ) then
 		trigger.action.outText(AGMissionBriefingText, 15)
+		--trigger.action.outSound('Background Chatter.ogg')
 		trigger.action.outSound('That Is Our Target.ogg')
 	elseif ( OperationComplete == true ) then
 		trigger.action.outText("The Operation Has Been Completed, There Are No Further Objectives", 15)
@@ -351,9 +354,10 @@ function SEF_RadioMenuSetup()
 	--////Setup Menu Option To Get The Current Objective
 	missionCommands.addCommandForCoalition(coalition.side.BLUE, "Check Current Objective", nil, function() CheckObjectiveRequest() end, nil)
 	--////Target Report to get target numbers and coordinates 
-	--missionCommands.addCommandForCoalition(coalition.side.BLUE, "Target Report", nil, function() TargetReport() end, nil)
+	missionCommands.addCommandForCoalition(coalition.side.BLUE, "Target Report", nil, function() TargetReport() end, nil)
 	--////Drop Smoke On The Target
 	missionCommands.addCommandForCoalition(coalition.side.BLUE, "Smoke Current Objective", nil, function() SEF_TargetSmoke() end, nil)
+	
 	
 	--////AI Support Flights Mission Abort Codes
 	--missionCommands.addCommandForCoalition(coalition.side.BLUE, "Abort Mission Fighter Screen", SupportMenuAbort, function() AbortCAPMission() end, nil)	
@@ -374,6 +378,8 @@ function SEF_RadioMenuSetup()
 	--BlackpoolDisableShips  = missionCommands.addCommandForCoalition(coalition.side.BLUE, "Naval Ships AI Off", BlackpoolOptions, function() SEF_DisableShips() end, nil)
 	--BlackpoolDefenceCheck  = missionCommands.addCommandForCoalition(coalition.side.BLUE, "Check Defence Networks", BlackpoolOptions, function() SEF_CheckDefenceNetwork() end, nil)
 	BlackpoolSkipScenario  = missionCommands.addCommandForCoalition(coalition.side.BLUE, "Skip This Mission", BlackpoolOptions, function() SEF_SkipScenario() end, nil)	
+	BlackpoolCheckScenario  = missionCommands.addCommandForCoalition(coalition.side.BLUE, "Check mission status", BlackpoolOptions, function() SEF_ValidateMission() end, nil) 
+	
 	
 	--////CAP Support Sector List
 	--missionCommands.addCommandForCoalition(coalition.side.BLUE, "Sector Abu Musa Island", SupportMenuCAP, function() RequestFighterSupport('Abu Musa') end, nil)
@@ -671,6 +677,6 @@ end
 		--RED BOMBER ATTACKS - WAIT 10-15 MINUTES BEFORE STARTING
 		--timer.scheduleFunction(SEF_RedBomberScheduler, 53, timer.getTime() + math.random(600, 900))
 		--NAVAL DEFENCE ZONE SCANNER - WAIT 5 MINUTES BEFORE STARTING
-		timer.scheduleFunction(SEF_NavalDefenceZoneScanner, 53, timer.getTime() + 300)				
+		--timer.scheduleFunction(SEF_NavalDefenceZoneScanner, 53, timer.getTime() + 300)				
 	
 --////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

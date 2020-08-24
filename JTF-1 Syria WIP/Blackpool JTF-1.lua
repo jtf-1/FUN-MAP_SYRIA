@@ -72,10 +72,6 @@ end
 
 local ArcoRoosevelt=RECOVERYTANKER:New(UNIT:FindByName("CSG_CarrierGrp_Roosevelt-1"), "Tanker_S3-B_Arco3")
 ArcoRoosevelt:SetTakeoffAir()
---ArcoRoosevelt:SetTACAN(106, "S3B")
---ArcoRoosevelt:SetRadio(317.106)
---ArcoRoosevelt:SetCAllsign(CALLSIGN.Tanker.Arco, 3)
---ArcoRooseveltSetAltitude(6000)
 ArcoRoosevelt:Start()
 
 -- END CARRIER TANKER SECTION
