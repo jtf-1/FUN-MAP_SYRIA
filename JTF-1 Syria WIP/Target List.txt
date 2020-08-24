@@ -1,0 +1,10 @@
+SYRIA IADS MAP TARGETS
+
+https://en.wikipedia.org/wiki/2018_missile_strikes_against_Syria
+Barzah_SciCtr -- BT41 -- N 33.32.43 E 36.18.14
+Him_Shanshar -- BU64 -- N 34.41.23 E 36.29.03
+
+https://en.wikipedia.org/wiki/List_of_United_States_attacks_on_Syria_during_the_Syrian_Civil_War
+Deir_ez_Zor -- EV -- N 35.17.29 E 40.09.09
+Al_Tanf -- DT11 -- N 33.32.19 E 38.07.36
+Ja'Din -- dv74 -- N 34.41.00 E 38.41.29
