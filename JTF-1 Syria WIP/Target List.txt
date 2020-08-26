@@ -1,7 +1,9 @@
 SYRIA IADS MAP TARGETS
 
 https://en.wikipedia.org/wiki/2018_missile_strikes_against_Syria
-Barzah_SciCtr -- BT41 -- N 33.32.43 E 36.18.14
+
+13 April 2018 \nA Syrian government offensive to recapture the rebel-held Eastern Ghouta suburb began in February 2018. The offensive was condemned by Western media and governments for it's use of chemial weapons. In retaliation the US Join Cheifs targeted 3 locations, one of which is the Barzah Science Center in northern Damascus. The center was found to be the center responsible for Syria's chemical weapons program. In April 2018, a long range strike using multiple cruise missiles. \nTarget: Barzah Science Center \nLocation: N 33.32.43 E 36.18.14 (Map Grid: BT41) \nSuggested Munition(s): Cruise Missiles / Long Range Glide Bombs
+
 Him_Shanshar -- BU64 -- N 34.41.23 E 36.29.03
 
 https://en.wikipedia.org/wiki/List_of_United_States_attacks_on_Syria_during_the_Syrian_Civil_War

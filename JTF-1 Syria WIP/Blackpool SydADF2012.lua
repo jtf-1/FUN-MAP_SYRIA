@@ -7,10 +7,10 @@
 
 --Editable part v
 
-local SA6pc = 20
-local SA2pc = 20
-local SA3pc = 20
-local SA10pc = 20
+local SA6pc = 15
+local SA2pc = 15
+local SA3pc = 15
+local SA10pc = 30
 local EWRpc = 50
 
 --Editable part ^
@@ -105,17 +105,21 @@ redIADS:activate()
 DetectionSetGroup = SET_GROUP:New()
 DetectionSetGroup:FilterPrefixes("EWR")
 DetectionSetGroup:FilterStart()
--- Setup the detection and group targets to a 40km range!
-Detection = DETECTION_AREAS:New( DetectionSetGroup, 40000 )
+-- Setup the detection and group targets to a 30km range!
+Detection = DETECTION_AREAS:New( DetectionSetGroup, 10000 )
 -- Setup the A2A dispatcher, and initialize it.
 A2ADispatcher = AI_A2A_DISPATCHER:New( Detection )
 -- Set 100km as the radius to engage any target by airborne friendlies.
 A2ADispatcher:SetEngageRadius(180000) -- 100000 is the default value.
 -- Set 200km as the radius to ground control intercept.
-A2ADispatcher:SetGciRadius(200000) -- 200000 is the default value.
+A2ADispatcher:SetGciRadius(100000) -- 200000 is the default value.
 A2ADispatcher:SetDefaultTakeoffFromParkingCold()
-A2ADispatcher:SetDefaultLandingAtRunway()
+A2ADispatcher:SetDefaultLandingAtEngineShutdown()
 BorderZone = ZONE_POLYGON:New( "RED-BORDER", GROUP:FindByName( "SyAF-GCI" ) )
+NorthCapZone = ZONE_POLYGON:New( "NorthCapZone", GROUP:FindByName( "CAP zone North" ) )
+SouthCapZone = ZONE_POLYGON:New( "SouthCapZone", GROUP:FindByName( "CAP zone South" ) )
+
+
 A2ADispatcher:SetBorderZone( BorderZone )
 --SQNs
 A2ADispatcher:SetSquadron( "54 Squadron", "Marj Ruhayyil", { "54 Squadron" }, 2 ) --mig23
@@ -134,19 +138,15 @@ A2ADispatcher:SetSquadron( "Russia GCI", "Bassel Al-Assad", { "Russia GCI" }, 2 
 A2ADispatcher:SetSquadronGrouping( "Russia GCI", 2 )
 A2ADispatcher:SetSquadronGci( "Russia GCI", 900, 1200 )
 
---[[
-A2ADispatcher:SetSquadron( "Russia North CAP", "Bassel Al-Assad", { "Russia North CAP" }, 2 ) --mig29s
-A2ADispatcher:SetSquadronGrouping( "Russia North CAP", 2 )
-CAPzoneNorth = ZONE_POLYGON:New( "CAP zone North", GROUP:FindByName( "CAP zone North" ) )
-A2ADispatcher:SetSquadronCAP( "Russia North CAP", "CAPzoneNorth", 4000, 10000, 450, 700, 900, 1200, "BARO" )
-A2ADispatcher:SetSquadronCapInterval( "Russia North CAP", 2, 180, 600) 
+A2ADispatcher:SetSquadron( "North CAP", "Hama", { "CAPnorth" }, 2 ) --mig29
+A2ADispatcher:SetSquadronGrouping( "North CAP", 2 )
+A2ADispatcher:SetSquadronCap( "North CAP", NorthCapZone, 4000, 8000, 600, 700, 800, 1200, "Baro" )
+A2ADispatcher:SetSquadronCapInterval( "North CAP", 2, 60, 600)
 
-A2ADispatcher:SetSquadron( "Russia South CAP", "Al-Dumayr", { "Russia South CAP" }, 2 ) --mig29s
-A2ADispatcher:SetSquadronGrouping( "Russia South CAP", 2 )
-CAPzoneSouth = ZONE_POLYGON:New( "CAP zone South", GROUP:FindByName( "CAP zone South" ) )
-A2ADispatcher:SetSquadronCAP( "Russia South CAP", "CAPzoneSouth", 4000, 10000, 450, 700, 900, 1200, "BARO" )
-A2ADispatcher:SetSquadronCapInterval( "Russia South CAP", 2, 180, 600)
-]]--
+A2ADispatcher:SetSquadron( "South CAP", "Al-Dumayr", { "CAPsouth" }, 2 ) --mig29
+A2ADispatcher:SetSquadronGrouping( "South CAP", 2 )
+A2ADispatcher:SetSquadronCap( "South CAP", SouthCapZone, 4000, 8000, 600, 700, 800, 1200, "Baro" )
+A2ADispatcher:SetSquadronCapInterval( "South CAP", 2, 60, 600)
 
 --A2ADispatcher:SetTacticalDisplay(true)
 A2ADispatcher:Start()

@@ -78,9 +78,9 @@ ArcoRoosevelt:Start()
 
 -- BEGIN RANGE SECTION
 
--- -- BEGIN ACM/BFM SECTION
+-- BEGIN ACM/BFM SECTION
 
--- --local SpawnBfm.groupName = nil
+--local SpawnBfm.groupName = nil
 
 -- -- BFM/ACM Zones
 -- BoxZone = ZONE_POLYGON:New( "Polygon_Box", GROUP:FindByName("zone_box") )

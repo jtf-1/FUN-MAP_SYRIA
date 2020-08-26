@@ -173,23 +173,23 @@ function SEF_InitializeMissionTable()
 	OperationBlackpool_AG[3] = {
 		TargetName = "Al_Tanf_Armor",
 		TargetStatic = false,
-		TargetBriefing = "Mission Update \nPrimary Objective - Destroy insurgent forces \nGrid DT11",
+		TargetBriefing = "Mission Update \nMay 18, 2017\nTarget: Militia Armor & troops\n\nA U.S. aircraft conducted airstrikes against vehicles, including a tank and bulldozer belonging to pro-government militias that were setting up fighting positions within the Al-Tanf deconfliction zone.\n\nLocation: N 35.17.29 E 40.09.09 (Map Grid: DT11)\nSuggested Munition(s): Armor piercing & cluster munitions.",
 	}						
 	OperationBlackpool_AG[4] = {
 		TargetName = "Barzah_SciCtr_1",
 		TargetStatic = true,
-		TargetBriefing = "Mission Update \nPrimary Objective - Destroy the Barzah Science Center \nNorthwest Damascus - Grid BT41",
+		TargetBriefing = "Mission Update \n13 April 2018 \nTarget: Barzah Science Center\n\nA Syrian government offensive to recapture the rebel-held Eastern Ghouta suburb began in February 2018. The offensive was condemned by Western media and governments for its use of chemical weapons. In retaliation the US Join Chiefs targeted 3 locations, one of which is the Barzah Science Center in northern Damascus. The center was found to be the center responsible for Syria's chemical weapons program. In April 2018, a long range strike using multiple cruise missiles was carried out.\n\nLocation: N 33.32.43 E 36.18.14 (Map Grid: BT41)\nSuggested Munition(s): Cruise Missiles / Long Range Glide Bombs / Laser guided munitions\nNotes: JTAC1 is on station for spotting & lasing.",
 	}					
 	OperationBlackpool_AG[5] = {
 		TargetName = "Him_Shanshar_1",
 		TargetStatic = true,
-		TargetBriefing = "Mission Update \nPrimary Objective - Destroy chemical weapons bunkers in HimShanshar  \nGrid BU64",
+		TargetBriefing = "Mission Update \n13 April 2018 \nTarget: Him_Shanshar Warehouses\n\nA Syrian government offensive to recapture the rebel-held Eastern Ghouta suburb began in February 2018. The offensive was condemned by Western media and governments for its use of chemical weapons. In retaliation the US Join Chiefs targeted 3 locations, one of which were 3 warehouses in Him_Shanshar. The warehouses contained parts of Syria’s chemical weapons cache. In April 2018, a long range strike using multiple cruise missiles was carried out.\n\nLocation: N 34.41.23 E 36.29.03 (Map Grid: BU64) \nSuggested Munition(s): Cruise Missiles / Long Range Glide Bombs",
   }
 	
 	--Debug Code
 	--[[
 	trigger.action.outText("Target 1 Name: "..OperationBlackpool_AG[1].TargetName, 15)
-	trigger.action.outText("Target 1 Type: "..OperationBlackpool_AG[1].TargetType, 15)
+	trigger.action.outText("Target 1 Type: "..OperationBlackpool_AG[1].TargetType\, 15)
 	trigger.action.outText(OperationBlackpool_AG[1].TargetBriefing, 15)
 	
 	OperationBlackpool_AG[1] = {}
@@ -354,7 +354,7 @@ function SEF_RadioMenuSetup()
 	--////Setup Menu Option To Get The Current Objective
 	missionCommands.addCommandForCoalition(coalition.side.BLUE, "Check Current Objective", nil, function() CheckObjectiveRequest() end, nil)
 	--////Target Report to get target numbers and coordinates 
-	missionCommands.addCommandForCoalition(coalition.side.BLUE, "Target Report", nil, function() TargetReport() end, nil)
+	--missionCommands.addCommandForCoalition(coalition.side.BLUE, "Target Report", nil, function() TargetReport() end, nil)
 	--////Drop Smoke On The Target
 	missionCommands.addCommandForCoalition(coalition.side.BLUE, "Smoke Current Objective", nil, function() SEF_TargetSmoke() end, nil)
 	
