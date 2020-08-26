@@ -6,6 +6,57 @@ local JtfAdmin = true --activate admin menu option in admin slots
 
 _SETTINGS:SetPlayerMenuOff()
 
+-- XXX BEGIN MENU DEFINITIONS
+
+
+
+-- ## CAP CONTROL
+MenuCapTop = MENU_COALITION:New( coalition.side.BLUE, " ENEMY CAP CONTROL" )
+	MenuCapNorth = MENU_COALITION:New( coalition.side.BLUE, "Syria North", MenuCapTop )
+	MenuCapCentral = MENU_COALITION:New( coalition.side.BLUE, "Syria Central", MenuCapTop )
+	MenuCapSouth = MENU_COALITION:New( coalition.side.BLUE, "Syria South", MenuCapTop )
+
+-- ## GROUND ATTACK MISSIONS
+MenuGroundTop = MENU_COALITION:New( coalition.side.BLUE, " GROUND ATTACK MISSIONS" )
+	
+	MenuCampAttack = MENU_COALITION:New( coalition.side.BLUE, " Camp Strike", MenuGroundTop )
+	
+	MenuConvoyAttack = MENU_COALITION:New( coalition.side.BLUE, " Convoy Strike", MenuGroundTop )
+		MenuConvoyAttackNorth = MENU_COALITION:New( coalition.side.BLUE, " Syriia North", MenuConvoyAttack )
+		MenuConvoyAttackCentral = MENU_COALITION:New( coalition.side.BLUE, " Syria Central", MenuConvoyAttack )
+		MenuConvoyAttackSouth = MENU_COALITION:New( coalition.side.BLUE, " Syria South", MenuConvoyAttack )
+	
+	MenuAirfieldAttack = MENU_COALITION:New(coalition.side.BLUE, " Airfield Strike", MenuGroundTop )
+		MenuAirfieldAttackNorth = MENU_COALITION:New( coalition.side.BLUE, " Syria East", MenuAirfieldAttack )
+		MenuAirfieldAttackCentral = MENU_COALITION:New( coalition.side.BLUE, " Syria Central", MenuAirfieldAttack )
+		MenuAirfieldAttackSouth = MENU_COALITION:New( coalition.side.BLUE, " Syria North", MenuAirfieldAttack )
+	
+	MenuFactoryAttack = MENU_COALITION:New(coalition.side.BLUE, " Factory Strike", MenuGroundTop )
+		MenuFactoryAttackNorth = MENU_COALITION:New( coalition.side.BLUE, " Syria North", MenuFactoryAttack )
+		MenuFactoryAttackCentral = MENU_COALITION:New( coalition.side.BLUE, " Syria Central", MenuFactoryAttack )
+		MenuFactoryAttackSouth = MENU_COALITION:New( coalition.side.BLUE, " Syria South", MenuFactoryAttack )
+	
+	MenuBridgeAttack = MENU_COALITION:New(coalition.side.BLUE, " Bridge Strike", MenuGroundTop )
+		MenuBridgeAttackNorth = MENU_COALITION:New( coalition.side.BLUE, " Syria North", MenuBridgeAttack )
+		MenuBridgeAttackCentral = MENU_COALITION:New( coalition.side.BLUE, " Syria Central", MenuBridgeAttack )
+		MenuBridgeAttackSouth = MENU_COALITION:New( coalition.side.BLUE, " Syria South", MenuBridgeAttack )
+	
+	MenuCommunicationsAttack = MENU_COALITION:New(coalition.side.BLUE, " WiP Communications Strike", MenuGroundTop )
+	
+	MenuC2Attack = MENU_COALITION:New(coalition.side.BLUE, " WiP C2 Strike", MenuGroundTop )
+
+-- ## ANTI-SHIP MISSIONS
+	--MenuAntiShipTop = MENU_COALITION:New(coalition.side.BLUE, " WiP ANTI-SHIP MISSIONS" ) -- WiP
+
+-- ## STRIKE PACKAGE MISSIONS
+	--MenuStrikePackageTop = MENU_COALITION:New(coalition.side.BLUE, " WiP STRIKE PACKAGE MISSIONS" ) -- WiP
+
+-- ## FLEET DEFENCE MISSIONS
+	--MenuFleetDefenceTop = MENU_COALITION:New(coalition.side.BLUE, " WiP FLEET DEFENCE MISSIONS" ) -- WiP
+ 
+
+-- END MENU DEFINITIONS
+
 -- BEGIN FUNCTIONS SECTION
 
 function SpawnSupport (SupportSpawn) -- spawnobject, spawnzone
@@ -181,40 +232,40 @@ end
 -- -- END ACM/BFM SECTION
 
 
--- -- ADMIN SECTION
+-- ADMIN SECTION
 
--- SetAdminClient = SET_CLIENT:New():FilterStart()
+SetAdminClient = SET_CLIENT:New():FilterStart()
 
--- local function restartMission()
-	-- trigger.action.setUserFlag("999", true)
--- end
+local function restartMission()
+	trigger.action.setUserFlag("999", true)
+end
 
--- local function BuildAdminMenu()
-	-- SetAdminClient:ForEachClient(function(client)
+local function BuildAdminMenu()
+	SetAdminClient:ForEachClient(function(client)
 		
-		-- if (client ~= nil) and (client:IsAlive()) then
-			-- adminGroup = client:GetGroup()
-			-- adminGroupName = adminGroup:GetName()
+		if (client ~= nil) and (client:IsAlive()) then
+			adminGroup = client:GetGroup()
+			adminGroupName = adminGroup:GetName()
 
-			-- env.info("ADMIN Player name: " ..client:GetPlayerName())
-			-- env.info("ADMIN Group Name: " ..adminGroupName)
+			env.info("ADMIN Player name: " ..client:GetPlayerName())
+			env.info("ADMIN Group Name: " ..adminGroupName)
 
 			
-			-- if string.find(adminGroupName, "XX_ADMIN") then
-				-- adminMenu = MENU_GROUP:New(adminGroup, "ADMIN")
-				-- MENU_GROUP_COMMAND:New(adminGroup, "Restart Mission", adminMenu, restartMission )
-			-- end
-		-- SetAdminClient:Remove(client:GetName(), true)
-		-- end
-	-- end)
-	-- timer.scheduleFunction(BuildAdminMenu, nil, timer.getTime() + 10)
--- end
+			if string.find(adminGroupName, "XX_ADMIN") then
+				adminMenu = MENU_GROUP:New(adminGroup, "ADMIN")
+				MENU_GROUP_COMMAND:New(adminGroup, "Restart Mission", adminMenu, restartMission )
+			end
+		SetAdminClient:Remove(client:GetName(), true)
+		end
+	end)
+	timer.scheduleFunction(BuildAdminMenu, nil, timer.getTime() + 10)
+end
 
--- if JtfAdmin then
-	-- env.info("ADMIN enabled")
-	-- BuildAdminMenu()
--- end
+if JtfAdmin then
+	env.info("ADMIN enabled")
+	BuildAdminMenu()
+end
 
--- --END ADMIN SECTION
+--END ADMIN SECTION
 
 env.info( '*** JTF-1 MOOSE MISSION SCRIPT END ***' )
