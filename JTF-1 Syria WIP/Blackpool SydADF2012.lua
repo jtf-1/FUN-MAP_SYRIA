@@ -165,7 +165,7 @@ local AllZones=SET_ZONE:New():FilterOnce()
 
 SCHEDULER:New( nil, function()
   local mission=AUFTRAG:NewCAS(Zone.Alpha)
-  local fg=FLIGHTGROUP:New("2 Squadron-4")
+  local fg=FLIGHTGROUP:New("2 Squadron")
   fg:AddMission(mission)
   
   local mission=AUFTRAG:NewCAS(Zone.Alpha)
@@ -179,11 +179,11 @@ end, {},4, 900, .8)
 
 SCHEDULER:New( nil, function()
   local mission=AUFTRAG:NewCAS(Zone.Alpha)
-  local fg=FLIGHTGROUP:New("825 Squadron-7")
+  local fg=FLIGHTGROUP:New("825 Squadron")
   fg:AddMission(mission)
  
   local mission=AUFTRAG:NewCAS(Zone.Alpha)
-  local fg=FLIGHTGROUP:New("Warthog-6")
+  local fg=FLIGHTGROUP:New("74 Warthog")
   fg:AddMission(mission) 
   
   local mission=AUFTRAG:NewCAS(Zone.Bravo)

@@ -48,8 +48,7 @@ function SEF_ValidateMission()
 		--TARGET IS NOT STATIC					
 		if ( GROUP:FindByName(AGMissionTarget):IsAlive() == true ) then
 			--GROUP VALID
-			trigger.action.outSound('Background Chatter.ogg')
-			--trigger.action.outSound('That Is Our Target.ogg')
+			trigger.action.outSound('That Is Our Target.ogg')
 			trigger.action.outText(AGMissionBriefingText,30)			
 		elseif ( GROUP:FindByName(AGMissionTarget):IsAlive() == false or GROUP:FindByName(AGMissionTarget):IsAlive() == nil ) then
 			--GROUP NOT VALID
@@ -65,8 +64,7 @@ function SEF_ValidateMission()
 		--TARGET IS STATIC		
 		if ( StaticObject.getByName(AGMissionTarget) ~= nil and StaticObject.getByName(AGMissionTarget):isExist() == true ) then
 			--STATIC IS VALID
-			trigger.action.outSound('Background Chatter.ogg')
-			--trigger.action.outSound('That Is Our Target.ogg')
+			trigger.action.outSound('That Is Our Target.ogg')
 			trigger.action.outText(AGMissionBriefingText,30)								
 		elseif ( StaticObject.getByName(AGMissionTarget) == nil or StaticObject.getByName(AGMissionTarget):isExist() == false ) then
 			--STATIC TARGET NOT VALID, ASSUME TARGET ALREADY DESTROYED			
@@ -166,9 +164,9 @@ function SEF_InitializeMissionTable()
 		TargetBriefing = "Mission Update \nPrimary Objective - Destroy Su-17 located near Tabqa Airfield  \nGrid DV65",
 	}				
 	OperationBlackpool_AG[2] = {
-		TargetName = "Deir_ez_Zor_3",
-		TargetStatic = true,
-		TargetBriefing = "Mission Update \nPrimary Objective - Destroy troop barraks/housing on south side of runway \nEast of Grid EV ",
+		TargetName = "Deir_ez_Zor_11",
+		TargetStatic = false,
+		TargetBriefing = "Mission Update \n17 September 2016\nTarget: ISIL Militia ENE of Deir ez Zor Airport \nIn May 2015, ISIL militants launched an offensive, capturing both Palmyra and the area surrounding Deir ez-Zor, and cutting off the remaining supply line to Deir ez-Zor. The city was then effectively under siege by ISIL, leaving supplies to be solely delivered by transport helicopters. Consequently, ISIL began launching frequent attacks, which continued until 10 September 2017, against the Deir ez-Zor Airport with the aim of halting the delivery of supplies.\n\nLocation: N 35.17.29 E 40.09.09 (Map Grid: SE of Grid EV)\nSuggested Munition(s): Cluster munitions, extra fuel, and A-A missiles",
 	}	
 	OperationBlackpool_AG[3] = {
 		TargetName = "Al_Tanf_Armor",
@@ -208,7 +206,6 @@ local function CheckObjectiveRequest()
 	
 	if ( AGMissionBriefingText ~= nil ) then
 		trigger.action.outText(AGMissionBriefingText, 15)
-		--trigger.action.outSound('Background Chatter.ogg')
 		trigger.action.outSound('That Is Our Target.ogg')
 	elseif ( OperationComplete == true ) then
 		trigger.action.outText("The Operation Has Been Completed, There Are No Further Objectives", 15)
@@ -264,15 +261,17 @@ function TargetReport()
 					
 						BRMessage = "Target bearing "..PlayerBR
 						ELEMessage = "Elevation "..TargetHeight.."m".." / "..TargetHeightFt.."ft"
-					
+					--[[
 						_SETTINGS:SetLL_Accuracy(0)
 						CoordStringLLDMS = TargetCoord:ToStringLLDMS(SETTINGS:SetImperial())
 						_SETTINGS:SetLL_Accuracy(3)
 						CoordStringLLDDM = TargetCoord:ToStringLLDDM(SETTINGS:SetImperial())
 						_SETTINGS:SetLL_Accuracy(2)
-						CoordStringLLDMSDS = TargetCoord:ToStringLLDMSDS(SETTINGS:SetImperial())
-						
-						trigger.action.outTextForGroup(ClientGroupID, "Target Report For "..ClientPlayerName.."\n".."\n"..AGMissionBriefingText.."\n"..BRMessage.."\n"..SZMessage.."\n"..CoordStringLLDMS.."\n"..CoordStringLLDDM.."\n"..CoordStringLLDMSDS.."\n"..ELEMessage, 30)							
+						CoordStringLLDMSDS = TargetCoord:\(SETTINGS:SetImperial())
+						  ]]--
+						--trigger.action.outTextForGroup(ClientGroupID, "Target Report For "..ClientPlayerName.."\n".."\n"..AGMissionBriefingText.."\n"..BRMessage.."\n"..SZMessage.."\n"..CoordStringLLDMS.."\n"..CoordStringLLDDM.."\n"..CoordStringLLDMSDS.."\n"..ELEMessage, 30)							
+				    trigger.action.outTextForGroup(ClientGroupID, "Target Report For "..ClientPlayerName.."\n".."\n"..AGMissionBriefingText.."\n"..BRMessage.."\n"..SZMessage.."\n"..ELEMessage, 30)              
+				
 					else						
 					end				
 				end
@@ -309,15 +308,17 @@ function TargetReport()
 
 					BRMessage = "Target bearing "..PlayerBR
 					ELEMessage = "Elevation "..TargetHeight.."m".." / "..TargetHeightFt.."ft"
-					
+					--[[
 					_SETTINGS:SetLL_Accuracy(0)
 					CoordStringLLDMS = TargetCoord:ToStringLLDMS(SETTINGS:SetImperial())
 					_SETTINGS:SetLL_Accuracy(3)
 					CoordStringLLDDM = TargetCoord:ToStringLLDDM(SETTINGS:SetImperial())
 					_SETTINGS:SetLL_Accuracy(2)
 					CoordStringLLDMSDS = TargetCoord:ToStringLLDMSDS(SETTINGS:SetImperial())
-					
-					trigger.action.outTextForGroup(ClientGroupID, "Target Report For "..ClientPlayerName.."\n".."\n"..AGMissionBriefingText.."\n"..BRMessage.."\n"..CoordStringLLDMS.."\n"..CoordStringLLDDM.."\n"..CoordStringLLDMSDS.."\n"..ELEMessage, 30)							
+					--]]
+					--trigger.action.outTextForGroup(ClientGroupID, "Target Report For "..ClientPlayerName.."\n".."\n"..AGMissionBriefingText.."\n"..BRMessage.."\n"..CoordStringLLDMS.."\n"..CoordStringLLDDM.."\n"..CoordStringLLDMSDS.."\n"..ELEMessage, 30)
+					trigger.action.outTextForGroup(ClientGroupID, "Target Report For "..ClientPlayerName.."\n".."\n"..AGMissionBriefingText.."\n"..BRMessage.."\n"..ELEMessage, 30)             
+												
 				else
 				end				
 			end
@@ -354,7 +355,7 @@ function SEF_RadioMenuSetup()
 	--////Setup Menu Option To Get The Current Objective
 	missionCommands.addCommandForCoalition(coalition.side.BLUE, "Check Current Objective", nil, function() CheckObjectiveRequest() end, nil)
 	--////Target Report to get target numbers and coordinates 
-	--missionCommands.addCommandForCoalition(coalition.side.BLUE, "Target Report", nil, function() TargetReport() end, nil)
+	missionCommands.addCommandForCoalition(coalition.side.BLUE, "Target Report", nil, function() TargetReport() end, nil)
 	--////Drop Smoke On The Target
 	missionCommands.addCommandForCoalition(coalition.side.BLUE, "Smoke Current Objective", nil, function() SEF_TargetSmoke() end, nil)
 	
@@ -378,7 +379,7 @@ function SEF_RadioMenuSetup()
 	--BlackpoolDisableShips  = missionCommands.addCommandForCoalition(coalition.side.BLUE, "Naval Ships AI Off", BlackpoolOptions, function() SEF_DisableShips() end, nil)
 	--BlackpoolDefenceCheck  = missionCommands.addCommandForCoalition(coalition.side.BLUE, "Check Defence Networks", BlackpoolOptions, function() SEF_CheckDefenceNetwork() end, nil)
 	BlackpoolSkipScenario  = missionCommands.addCommandForCoalition(coalition.side.BLUE, "Skip This Mission", BlackpoolOptions, function() SEF_SkipScenario() end, nil)	
-	BlackpoolCheckScenario  = missionCommands.addCommandForCoalition(coalition.side.BLUE, "Check mission status", BlackpoolOptions, function() SEF_ValidateMission() end, nil) 
+	--BlackpoolCheckScenario  = missionCommands.addCommandForCoalition(coalition.side.BLUE, "Check mission status", BlackpoolOptions, function() SEF_ValidateMission() end, nil) 
 	
 	
 	--////CAP Support Sector List
