@@ -1,1 +1,1 @@
-assert(loadfile("D:\\Documents\\GitHub\\FUN-MAP_SYRIA\\JTF-1_SYRIA_Fun_Map.miz"))()
+assert(loadfile("D:\\Documents\\GitHub\\FUN-MAP_SYRIA\\scripts\\Fun-Map_SYRIA.lua"))()
