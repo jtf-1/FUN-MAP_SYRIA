@@ -48,3 +48,24 @@ Tarawa LHA-1:
 
 (Use LHA TWR alt freq 278.325 to call AI Tower for landing)
 
+RANGES
+======
+
+The following ranges are populated with multiple targets; YG44. 
+
+YG44 is situated approx 30NM North East of Incirlik. See the in-game kneeboard for target data.
+
+Ranges are script scored and have an F10 menu system you can use to manage them. A range instructor is available at each range to provide hit assessment. 
+
+Bomb targets are scored on the proximity of the last round to the target. Smoke will be used to mark the round's impact.
+
+Strafe Pits, where available, are configured with three targets per lane. Aircraft must be below 3000ft AGL and within 500ft either side of the inbound heading to the target to avoid a foul pass. Rounds fired after the foul line will not count.
+
+AI BFM/ACM
+==========
+
+On-demand BFM and ACM adversary spawns are available via the BFM/ACM F10 menu while aircraft are within the Karaman BFM/ACM zone (K-BAZ). The Eastern perimter of K-BAZ commences approx 50NM due West of Incirlik, and has a radius of approx 40NM. The centre of K-BAZ is located at N37°04.000' E003°35.000'. BFM adversaries will be spawned directly ahead of you at the selected distance (5NM, 10NM, 20NM). ACM adversaries will be spawned on the West side of K-BAZ and will fly Eastwards.
+
+The Missile Trainer will be active while inside this area. Guns are not included in the missile trainer protection.
+
+Adversaries spawned in this area can be removed via the BFM/ACM F10 menu. Aircraft do not need to be inside K-BAZ to use this command. 
