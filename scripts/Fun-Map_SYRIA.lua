@@ -2,57 +2,60 @@ env.info( '*** JTF-1 SYRIA Fun Map MOOSE script ***' )
 env.info( '*** JTF-1 MOOSE MISSION SCRIPT START ***' )
 
 
-local JtfAdmin = true --activate admin menu option in admin slots
+local jtfAdmin = true --activate admin menu option in admin slots
+local jtfDebugMenu = false -- activate debug menu options
 
 _SETTINGS:SetPlayerMenuOff()
 
 -- XXX BEGIN MENU DEFINITIONS
 
+-- AI BFM/ACM
 
+menuAcmBfmTop = MENU_COALITION:New( coalition.side.BLUE, "ACM/BFM" )
 
 -- ## CAP CONTROL
-MenuCapTop = MENU_COALITION:New( coalition.side.BLUE, " ENEMY CAP CONTROL" )
+MenuCapTop = MENU_COALITION:New( coalition.side.BLUE, "WiP ENEMY CAP CONTROL" )
 	MenuCapNorth = MENU_COALITION:New( coalition.side.BLUE, "Syria North", MenuCapTop )
 	MenuCapCentral = MENU_COALITION:New( coalition.side.BLUE, "Syria Central", MenuCapTop )
 	MenuCapSouth = MENU_COALITION:New( coalition.side.BLUE, "Syria South", MenuCapTop )
 
 -- ## GROUND ATTACK MISSIONS
-MenuGroundTop = MENU_COALITION:New( coalition.side.BLUE, " GROUND ATTACK MISSIONS" )
+MenuGroundTop = MENU_COALITION:New( coalition.side.BLUE, "WiP GROUND ATTACK MISSIONS" )
 	
-	MenuCampAttack = MENU_COALITION:New( coalition.side.BLUE, " Camp Strike", MenuGroundTop )
+	MenuCampAttack = MENU_COALITION:New( coalition.side.BLUE, "Camp Strike", MenuGroundTop )
 	
-	MenuConvoyAttack = MENU_COALITION:New( coalition.side.BLUE, " Convoy Strike", MenuGroundTop )
-		MenuConvoyAttackNorth = MENU_COALITION:New( coalition.side.BLUE, " Syriia North", MenuConvoyAttack )
-		MenuConvoyAttackCentral = MENU_COALITION:New( coalition.side.BLUE, " Syria Central", MenuConvoyAttack )
-		MenuConvoyAttackSouth = MENU_COALITION:New( coalition.side.BLUE, " Syria South", MenuConvoyAttack )
+	MenuConvoyAttack = MENU_COALITION:New( coalition.side.BLUE, "Convoy Strike", MenuGroundTop )
+		MenuConvoyAttackNorth = MENU_COALITION:New( coalition.side.BLUE, "Syriia North", MenuConvoyAttack )
+		MenuConvoyAttackCentral = MENU_COALITION:New( coalition.side.BLUE, "Syria Central", MenuConvoyAttack )
+		MenuConvoyAttackSouth = MENU_COALITION:New( coalition.side.BLUE, "Syria South", MenuConvoyAttack )
 	
-	MenuAirfieldAttack = MENU_COALITION:New(coalition.side.BLUE, " Airfield Strike", MenuGroundTop )
-		MenuAirfieldAttackNorth = MENU_COALITION:New( coalition.side.BLUE, " Syria East", MenuAirfieldAttack )
-		MenuAirfieldAttackCentral = MENU_COALITION:New( coalition.side.BLUE, " Syria Central", MenuAirfieldAttack )
-		MenuAirfieldAttackSouth = MENU_COALITION:New( coalition.side.BLUE, " Syria North", MenuAirfieldAttack )
+	MenuAirfieldAttack = MENU_COALITION:New(coalition.side.BLUE, "Airfield Strike", MenuGroundTop )
+		MenuAirfieldAttackNorth = MENU_COALITION:New( coalition.side.BLUE, "Syria East", MenuAirfieldAttack )
+		MenuAirfieldAttackCentral = MENU_COALITION:New( coalition.side.BLUE, "Syria Central", MenuAirfieldAttack )
+		MenuAirfieldAttackSouth = MENU_COALITION:New( coalition.side.BLUE, "Syria North", MenuAirfieldAttack )
 	
-	MenuFactoryAttack = MENU_COALITION:New(coalition.side.BLUE, " Factory Strike", MenuGroundTop )
-		MenuFactoryAttackNorth = MENU_COALITION:New( coalition.side.BLUE, " Syria North", MenuFactoryAttack )
-		MenuFactoryAttackCentral = MENU_COALITION:New( coalition.side.BLUE, " Syria Central", MenuFactoryAttack )
-		MenuFactoryAttackSouth = MENU_COALITION:New( coalition.side.BLUE, " Syria South", MenuFactoryAttack )
+	MenuFactoryAttack = MENU_COALITION:New(coalition.side.BLUE, "Factory Strike", MenuGroundTop )
+		MenuFactoryAttackNorth = MENU_COALITION:New( coalition.side.BLUE, "Syria North", MenuFactoryAttack )
+		MenuFactoryAttackCentral = MENU_COALITION:New( coalition.side.BLUE, "Syria Central", MenuFactoryAttack )
+		MenuFactoryAttackSouth = MENU_COALITION:New( coalition.side.BLUE, "Syria South", MenuFactoryAttack )
 	
-	MenuBridgeAttack = MENU_COALITION:New(coalition.side.BLUE, " Bridge Strike", MenuGroundTop )
-		MenuBridgeAttackNorth = MENU_COALITION:New( coalition.side.BLUE, " Syria North", MenuBridgeAttack )
-		MenuBridgeAttackCentral = MENU_COALITION:New( coalition.side.BLUE, " Syria Central", MenuBridgeAttack )
-		MenuBridgeAttackSouth = MENU_COALITION:New( coalition.side.BLUE, " Syria South", MenuBridgeAttack )
+	MenuBridgeAttack = MENU_COALITION:New(coalition.side.BLUE, "Bridge Strike", MenuGroundTop )
+		MenuBridgeAttackNorth = MENU_COALITION:New( coalition.side.BLUE, "Syria North", MenuBridgeAttack )
+		MenuBridgeAttackCentral = MENU_COALITION:New( coalition.side.BLUE, "Syria Central", MenuBridgeAttack )
+		MenuBridgeAttackSouth = MENU_COALITION:New( coalition.side.BLUE, "Syria South", MenuBridgeAttack )
 	
-	MenuCommunicationsAttack = MENU_COALITION:New(coalition.side.BLUE, " WiP Communications Strike", MenuGroundTop )
+	MenuCommunicationsAttack = MENU_COALITION:New(coalition.side.BLUE, "WiP Communications Strike", MenuGroundTop )
 	
-	MenuC2Attack = MENU_COALITION:New(coalition.side.BLUE, " WiP C2 Strike", MenuGroundTop )
+	MenuC2Attack = MENU_COALITION:New(coalition.side.BLUE, "WiP C2 Strike", MenuGroundTop )
 
 -- ## ANTI-SHIP MISSIONS
-	--MenuAntiShipTop = MENU_COALITION:New(coalition.side.BLUE, " WiP ANTI-SHIP MISSIONS" ) -- WiP
+	--MenuAntiShipTop = MENU_COALITION:New(coalition.side.BLUE, "WiP ANTI-SHIP MISSIONS" ) -- WiP
 
 -- ## STRIKE PACKAGE MISSIONS
-	--MenuStrikePackageTop = MENU_COALITION:New(coalition.side.BLUE, " WiP STRIKE PACKAGE MISSIONS" ) -- WiP
+	--MenuStrikePackageTop = MENU_COALITION:New(coalition.side.BLUE, "WiP STRIKE PACKAGE MISSIONS" ) -- WiP
 
 -- ## FLEET DEFENCE MISSIONS
-	--MenuFleetDefenceTop = MENU_COALITION:New(coalition.side.BLUE, " WiP FLEET DEFENCE MISSIONS" ) -- WiP
+	--MenuFleetDefenceTop = MENU_COALITION:New(coalition.side.BLUE, "WiP FLEET DEFENCE MISSIONS" ) -- WiP
  
 
 -- END MENU DEFINITIONS
@@ -86,6 +89,17 @@ function SpawnSupport (SupportSpawn) -- spawnobject, spawnzone
 
 end -- function
 
+local function clearGroupSpawns(groupPrefix) -- remove AI group spawns
+	local activeGroupSpawns = SET_GROUP:New()
+	activeGroupSpawns:FilterPrefixes(groupPrefix)
+		:FilterStart()
+	
+	activeGroupSpawns:ForEachGroupAlive(function(group)
+		group:Destroy()
+	end)
+
+end -- function
+
 -- END FUNCTIONS SECTION
 
 -- BEGIN SUPPORT AIRCRAFT SECTION
@@ -113,336 +127,205 @@ end
 -- END SUPPORT AIRCRAFT SECTION
 
 
+
+
 -- BEGIN RANGE SECTION
 
+-- RANGE YG44 (CLASS A)
+local bombtarget_YG44 = {
+	"YG44 Class A Range-BombCircle_West",
+	"YG44 Class A Range-BombCircle_West",
+	"YG44 Class A Range-TacStrafe_01",
+	"YG44 Class A Range-TacStrafe_02",
+	"YG44 Class A Range-TacStrafe_03",
+	"YG44 Class A Range-TacStrafe_04",
+	"YG44 Class A Range-TacStrafe_05",
+	"YG44 Class A Range-TacStrafe_06",
+	"YG44 Class A Range-TacStrafe_07",
+	"YG44 Class A Range-TacStrafe_08",
+	}
+	
+local strafe_YG44_West = {
+	"YG44 Class A Range-Strafepit_West_01",
+	"YG44 Class A Range-Strafepit_West_02",
+	"YG44 Class A Range-Strafepit_West_03"
+	}
+	
+local strafe_YG44_East = {
+	"YG44 Class A Range-Strafepit_East_01",
+	"YG44 Class A Range-Strafepit_East_02",
+	"YG44 Class A Range-Strafepit_East_03",
+	}
+
+Range_YG44 = RANGE:New("Range YG44")
+Range_YG44:SetRangeZone(ZONE:FindByName("Zone_Range_YG44"))
+
+Range_YG44:AddBombingTargets(bombtarget_YG44)
+
+local FoulDist_YG44_Strafe = Range_YG44:GetFoullineDistance("YG44 Class A Range-Strafepit_West_02", "YG44 Class A Range-Fouline_West")
+Range_YG44:AddStrafePit(strafe_YG44_West, 3000, 300, nil, true, 20, FoulDist_YG44_Strafe)
+Range_YG44:AddStrafePit(strafe_YG44_East, 3000, 300, nil, true, 20, FoulDist_YG44_Strafe)
+
+Range_YG44:SetSoundfilesPath("Range Soundfiles/")
+Range_YG44:SetRangeControl(250.250)
+
+Range_YG44:Start()
+
+-- END RANGE YG44
 
 -- END RANGE SECTION
 
 
--- -- BEGIN CONVOY ATTACK FUNCTIONS
--- --  ( Central, West ) 
--- function SpawnConvoy ( _args ) -- ConvoyTemplates, SpawnHost {conv, dest, destzone, strikecoords, is_open}, ConvoyType, ConvoyThreats
 
-	-- local TemplateTable = _args[1]
-	-- local SpawnHostTable = _args[2]
-	-- local ConvoyType = _args[3]
-	-- local ConvoyThreats = _args[4]
+
+-- BEGIN ACM/BFM SECTION
+
+menuBfmAcmRemoveSpawns = MENU_COALITION_COMMAND:New(coalition.side.BLUE, "Clear all BFM/ACM spawns", menuAcmBfmTop, clearGroupSpawns, "ADVERSARY_" ) -- remove all BFM/ACM spawn groups
+
+
+-- BFM/ACM Zones
+BfmAcmZoneMenu = ZONE:FindByName("Zone_BfmAcmMenu")
+BfmAcmZone = ZONE:FindByName("Zone_BfmAcmFox")
+
+-- MISSILE TRAINER
+-- Create a new missile trainer object.
+fox=FOX:New()
+
+-- Add training zones.
+fox:AddSafeZone(Zone_BfmAcmFox)
+fox:AddLaunchZone(Zone_BfmAcmFox)
+fox:SetExplosionDistance(300)
+fox:SetDisableF10Menu()
+
+-- Start missile trainer.
+fox:Start()
+fox:SetDebugOnOff(false)
+
+
+-- ACM
+-- Spawn Objects
+AdvA4 = SPAWN:New( "ADVERSARY_A4" )		
+Adv28 = SPAWN:New( "ADVERSARY_MiG28" )	
+Adv27 = SPAWN:New( "ADVERSARY_Su27" )
+Adv23 = SPAWN:New( "ADVERSARY_MiG23" )
+Adv16 = SPAWN:New( "ADVERSARY_F16" )
+Adv18 = SPAWN:New( "ADVERSARY_F18" )
+
+-- will need to pass function caller (from menu) to each of these spawn functions.  
+-- Then calculate spawn position/velocity relative to caller
+function SpawnAdvBfm(adv,qty,group,rng)
+	range = rng * 1852
+	hdg = group:GetHeading()
+	pos = group:GetPointVec2()
+	spawnPt = pos:Translate(range, hdg, true)
+	spawnVec3 = spawnPt:GetVec3()
+	adv:InitGrouping(qty):InitHeading(hdg + 180):SpawnFromVec3(spawnVec3)
+	MESSAGE:New("BFM Adversary spawned."):ToGroup(group)
+end
+
+function SpawnAdvAcm(adv,qty,group)
+	hdg = 80
+	zoneAcm = ZONE:FindByName("Zone_AcmSpawn")
+	adv:InitGrouping(qty):InitHeading(90):SpawnInZone( zoneAcm, false, 5000, 7500 )
+	MESSAGE:New("ACM Adversary spawned."):ToGroup(group)
+end
+
+
+function BuildMenuCommandsBfmAcm (AdvMenu, MenuGroup, MenuName, ParentMenu, AdvType, EngType, AdvQty)
+
+	if EngType == "ACM" then
+		_G[AdvMenu] = MENU_GROUP:New( MenuGroup, MenuName, ParentMenu)
+			_G[AdvMenu .. "_single"] = MENU_GROUP_COMMAND:New( MenuGroup, "Single", _G[AdvMenu], SpawnAdvAcm, AdvType, 1, MenuGroup )
+			_G[AdvMenu .. "_pair"] = MENU_GROUP_COMMAND:New( MenuGroup, "Pair", _G[AdvMenu], SpawnAdvAcm, AdvType, 2, MenuGroup )
+			_G[AdvMenu .. "_four"] = MENU_GROUP_COMMAND:New( MenuGroup, "Four", _G[AdvMenu], SpawnAdvAcm, AdvType, 4, MenuGroup )
+	else
+		_G[AdvMenu] = MENU_GROUP:New( MenuGroup, MenuName, ParentMenu)
+			_G[AdvMenu .. "_rng5"] = MENU_GROUP_COMMAND:New( MenuGroup, "5 nmi", _G[AdvMenu], SpawnAdvBfm, AdvType, AdvQty, MenuGroup, 5)
+			_G[AdvMenu .. "_rng10"] = MENU_GROUP_COMMAND:New( MenuGroup, "10 nmi", _G[AdvMenu], SpawnAdvBfm, AdvType, AdvQty, MenuGroup, 10)
+			_G[AdvMenu .. "_rng20"] = MENU_GROUP_COMMAND:New( MenuGroup, "20 nmi", _G[AdvMenu], SpawnAdvBfm, AdvType, AdvQty, MenuGroup, 20)
+	end
+end
+
+function BuildMenusBfmAcm(MenuGroup, MenuName, SpawnGroup, EngType, AdvQty)
 	
-	
-	-- local SpawnIndex = math.random ( 1, #SpawnHostTable )
-	-- local SpawnHost = SpawnHostTable[SpawnIndex].conv
-	-- local DestZone = SpawnHostTable[SpawnIndex].destzone
+	if EngType == "ACM" then
+		AdvSuffix = "_ACM"
+		BfmAcmMenu = SpawnGroup
+	else
+		AdvSuffix = "_BFM_" .. tostring(AdvQty)
+		BfmAcmMenu = MENU_GROUP:New(MenuGroup, MenuName, SpawnGroup)
+	end
 
-  -- --------------------------------------
-  -- --- Create Mission Mark on F10 map ---
-  -- --------------------------------------
-  
-  -- --MissionMapMark(CampTableIndex)
-  -- local StrikeMarkZone = SpawnHost -- ZONE object for zone named in strikezone 
-  -- local StrikeMarkZoneCoord = StrikeMarkZone:GetCoordinate() -- get coordinates of strikezone
+	BuildMenuCommandsBfmAcm("SpawnA4menu" .. AdvSuffix, MenuGroup, "Adversary A-4", BfmAcmMenu, AdvA4, EngType, AdvQty)
+	BuildMenuCommandsBfmAcm("Spawn28menu" .. AdvSuffix, MenuGroup, "Adversary MiG-28", BfmAcmMenu, Adv28, EngType, AdvQty)
+	BuildMenuCommandsBfmAcm("Spawn23menu" .. AdvSuffix, MenuGroup, "Adversary MiG-23", BfmAcmMenu, Adv23, EngType, AdvQty)
+	BuildMenuCommandsBfmAcm("Spawn27menu" .. AdvSuffix, MenuGroup, "Adversary Su-27", BfmAcmMenu, Adv27, EngType, AdvQty)
+	BuildMenuCommandsBfmAcm("Spawn16menu" .. AdvSuffix, MenuGroup, "Adversary F-16", BfmAcmMenu, Adv16, EngType, AdvQty)
+	BuildMenuCommandsBfmAcm("Spawn18menu" .. AdvSuffix, MenuGroup, "Adversary F-18", BfmAcmMenu, Adv18, EngType, AdvQty)		
 
-  -- local StrikeMarkType = "Convoy"
-  -- local StrikeMarkCoordsLLDMS = StrikeMarkZoneCoord:ToStringLLDMS(_SETTINGS:SetLL_Accuracy(0)) --TableStrikeAttack[StrikeIndex].strikecoords
-  -- local StrikeMarkCoordsLLDDM = StrikeMarkZoneCoord:ToStringLLDDM(_SETTINGS:SetLL_Accuracy(3)) --TableStrikeAttack[StrikeIndex].strikecoords
+end
 
-  -- local StrikeMarkLabel = StrikeMarkType 
-    -- .. " Strike\n" 
-    -- .. StrikeMarkCoordsLLDMS
-	-- .. "\n"
-	-- .. StrikeMarkCoordsLLDDM
+function BuildMenuCommandsAcm ()
 
-  -- local StrikeMark = StrikeMarkZoneCoord:MarkToAll(StrikeMarkLabel, true) -- add mark to map
+end
+-- CLIENTS
+BLUFOR = SET_GROUP:New():FilterCoalitions( "blue" ):FilterStart()
 
-  -- --SpawnCampsTable[ CampTableIndex ].strikemarkid = StrikeMark -- add mark ID to table 
+-- SPAWN AIR MENU
+local SetClient = SET_CLIENT:New():FilterCoalitions("blue"):FilterStart() -- create a list of all clients
 
-	
-	-- SpawnHost:InitRandomizeTemplate( TemplateTable )
-		-- :OnSpawnGroup(
-			-- function ( SpawnGroup )
-				-- CheckConvoy = SCHEDULER:New( nil, 
-					-- function()
-						-- if SpawnGroup:IsPartlyInZone( DestZone ) then
-							-- SpawnGroup:Destroy( false )
-						-- end
-					-- end,
-					-- {}, 0, 60 
-				-- )
-			-- end
-		-- )
-		-- :Spawn()
-
-
-	-- local ConvoyAttackBrief = "++++++++++++++++++++++++++++++++++++" 
-		-- .."\n\nIntelligence is reporting an enemy "
-		-- .. ConvoyType
-		-- .. " convoy\nbelieved to be routing to "
-		-- .. SpawnHostTable[SpawnIndex].dest .. "."
-		-- .. "\n\nMission:  LOCATE AND DESTROY THE CONVOY."
-		-- .. "\n\nLast Known Position:\n"
-		-- .. StrikeMarkCoordsLLDMS
-		-- .. "\n"
-		-- .. StrikeMarkCoordsLLDDM
-		-- .. "\n"
-		-- .. ConvoyThreats
-		-- .. "\n\n++++++++++++++++++++++++++++++++++++"
-		
-	-- MESSAGE:New( ConvoyAttackBrief, 30, "" ):ToAll()
-	
-		
--- end --function  
-
-
----------------------------------
---- On-demand convoy missions ---
----------------------------------
-
--- SpawnConvoys = { -- map portion, { spawn host, nearest town, Lat Long, destination zone, spawned status } ...
-	-- west = {
-		-- { 
-			-- conv = SPAWN:New( "CONVOY_01" ), 
-			-- dest = "Gudauta Airfield", 
-			-- destzone = ZONE:New("ConvoyObjective_01"), 
-			-- coords = "43  21  58 N | 040  06  31 E", 
-			-- is_open = true
-		-- },
-		-- { 
-			-- conv = SPAWN:New( "CONVOY_02" ), 
-			-- dest = "Gudauta Airfield", 
-			-- destzone = ZONE:New("ConvoyObjective_01"), 
-			-- coords = "43  27  58 N | 040  32  34 E", 
-			-- is_open = true
-		-- },
-		-- { 
-			-- conv = SPAWN:New( "CONVOY_03" ), 
-			-- dest = "Sukhumi Airfield", 
-			-- destzone = ZONE:New("ConvoyObjective_02"), 
-			-- coords = "43  02  07 N | 041  27  14 E", 
-			-- is_open = true
-		-- },
-		-- { 
-			-- conv = SPAWN:New( "CONVOY_04" ), 
-			-- dest = "Sukhumi Airfield", 
-			-- destzone = ZONE:New("ConvoyObjective_02"), 
-			-- coords = "42  51  35 N | 041  46  39 E", 
-			-- is_open = true
-		-- },
-	-- },
-	-- central = {
-		-- { 
-			-- conv = SPAWN:New( "CONVOY_05" ), 
-			-- dest = "Kutaisi Airfield", 
-			-- destzone = ZONE:New("ConvoyObjective_03"), 
-			-- coords = "42  33  39 N | 042  51  17 E", 
-			-- is_open = true
-		-- },
-		-- { 
-			-- conv = SPAWN:New( "CONVOY_06" ), 
-			-- dest = "Kutaisi Airfield", 
-			-- destzone = ZONE:New("ConvoyObjective_03"), 
-			-- coords = "42  23  52 N | 043  02  27 E", 
-			-- pen = true
-		-- },
-		-- { 
-			-- conv = SPAWN:New( "CONVOY_07" ), 
-			-- dest = "Khashuri", 
-			-- destzone = ZONE:New("ConvoyObjective_04"), 
-			-- coords = "42  19  59 N | 043  23  08 E", 
-			-- is_open = true
-		-- },
-		-- { 
-			-- conv = SPAWN:New( "CONVOY_08" ), 
-			-- dest = "Khashuri", 
-			-- destzone = ZONE:New("ConvoyObjective_04"), 
-			-- coords = "42  19  05 N | 043  56  01 E", 
-			-- is_open = true
-		-- },
-	-- }
--- }
-
--- ConvoyAttackSpawn = SPAWN:New( "CONVOY_Default" )
-
--- ConvoyHardTemplates = {
-	-- "CONVOY_Hard_01",
-	-- "CONVOY_Hard_02",
--- }
--- ConvoySoftTemplates = {
-	-- "CONVOY_Soft_01",
-	-- "CONVOY_Soft_02",
--- }
-
--- HardType = "Armoured"
--- SoftType = "Supply"
--- HardThreats = "\n\nThreats:  MBT, Radar SAM, I/R SAM, LIGHT ARMOR, AAA"
--- SoftThreats = "\n\nThreats:  LIGHT ARMOR, Radar SAM, I/R SAM, AAA"
-
--- -- ## Central Zones
--- _hard_central_args = {
-	-- ConvoyHardTemplates,
-	-- SpawnConvoys.central,
-	-- HardType,
-	-- HardThreats
--- }
--- --cmdConvoyAttackHardCentral = MENU_COALITION_COMMAND:New( coalition.side.BLUE," Armoured Convoy",MenuConvoyAttackCentral, SpawnConvoy, _hard_central_args )
-
--- _soft_central_args = {
-	-- ConvoySoftTemplates,
-	-- SpawnConvoys.central,
-	-- SoftType,
-	-- SoftThreats
--- }
--- --cmdConvoyAttackSoftCentral = MENU_COALITION_COMMAND:New( coalition.side.BLUE," Supply Convoy",MenuConvoyAttackCentral, SpawnConvoy, _soft_central_args )
-
--- -- ## West Zones
--- _hard_west_args = {
-	-- ConvoyHardTemplates,
-	-- SpawnConvoys.west,
-	-- HardType,
-	-- HardThreats
--- }
--- --cmdConvoyAttackHardWest = MENU_COALITION_COMMAND:New( coalition.side.BLUE," Armoured Convoy",MenuConvoyAttackWest, SpawnConvoy, _hard_west_args )
-
--- _soft_west_args = {
-	-- ConvoySoftTemplates,
-	-- SpawnConvoys.west,
-	-- SoftType,
-	-- SoftThreats
--- }
--- --cmdConvoyAttackSoftWest = MENU_COALITION_COMMAND:New( coalition.side.BLUE," Supply Convoy",MenuConvoyAttackWest, SpawnConvoy, _soft_west_args )
-
-
-
-	
--- -- END CONVOY ATTACK SECTION
-
-
--- END CONVOY ATTACK FUNCTIONS
-
-
-
-
-
-
--- -- BEGIN ACM/BFM SECTION
-
--- --local SpawnBfm.groupName = nil
-
--- -- BFM/ACM Zones
--- BoxZone = ZONE_POLYGON:New( "Polygon_Box", GROUP:FindByName("zone_box") )
--- BfmAcmZoneMenu = ZONE_POLYGON:New( "Polygon_BFM_ACM", GROUP:FindByName("COYOTEABC") )
--- BfmAcmZone = ZONE:FindByName("Zone_BfmAcmFox")
-
--- -- MISSILE TRAINER
-
--- -- Create a new missile trainer object.
--- fox=FOX:New()
-
--- -- Add training zones.
--- fox:AddSafeZone(BfmAcmZoneFox)
--- fox:AddLaunchZone(BfmAcmZoneFox)
--- fox:SetExplosionDistance(300)
--- fox:SetDisableF10Menu()
-
--- -- Start missile trainer.
--- fox:Start()
--- fox:SetDebugOnOff(false)
-
-
--- -- Spawn Objects
--- AdvA4 = SPAWN:New( "ADV_A4" )		
--- Adv28 = SPAWN:New( "ADV_MiG28" )	
--- Adv27 = SPAWN:New( "ADV_Su27" )
--- Adv23 = SPAWN:New( "ADV_MiG23" )
--- Adv16 = SPAWN:New( "ADV_F16" )
--- Adv18 = SPAWN:New( "ADV_F18" )
-
--- -- will need to pass function caller (from menu) to each of these spawn functions.  
--- -- Then calculate spawn position/velocity relative to caller
--- function SpawnAdv(adv,qty,group,rng)
-	-- range = rng * 1852
-	-- hdg = group:GetHeading()
-	-- pos = group:GetPointVec2()
-	-- spawnPt = pos:Translate(range, hdg, true)
-	-- spawnVec3 = spawnPt:GetVec3()
-	-- if BoxZone:IsVec3InZone(spawnVec3) then
-		-- MESSAGE:New("Cannot spawn adversary aircraft in The Box.\nChange course or increase your range from The Box, and try again."):ToGroup(group)
-	-- else
-		-- adv:InitGrouping(qty):InitHeading(hdg + 180):SpawnFromVec3(spawnVec3)
-		-- MESSAGE:New("Adversary spawned."):ToGroup(group)
-	-- end
--- end
-
--- function BuildMenuCommands (AdvMenu, MenuGroup, MenuName, BfmMenu, AdvType, AdvQty)
-
-	-- _G[AdvMenu] = MENU_GROUP:New( MenuGroup, MenuName, BfmMenu)
-		-- _G[AdvMenu .. "_rng5"] = MENU_GROUP_COMMAND:New( MenuGroup, "5 nmi", _G[AdvMenu], SpawnAdv, AdvType, AdvQty, MenuGroup, 5)
-		-- _G[AdvMenu .. "_rng10"] = MENU_GROUP_COMMAND:New( MenuGroup, "10 nmi", _G[AdvMenu], SpawnAdv, AdvType, AdvQty, MenuGroup, 10)
-		-- _G[AdvMenu .. "_rng20"] = MENU_GROUP_COMMAND:New( MenuGroup, "20 nmi", _G[AdvMenu], SpawnAdv, AdvType, AdvQty, MenuGroup, 20)
-
--- end
-
--- function BuildMenus(AdvQty, MenuGroup, MenuName, SpawnBfmGroup)
-
-	-- local AdvSuffix = "_" .. tostring(AdvQty)
-	-- --local BfmMenu = "SpawnBfm" .. AdvSuffix
-
-	-- BfmMenu = MENU_GROUP:New(MenuGroup, MenuName, SpawnBfmGroup)
-	
-		-- BuildMenuCommands("SpawnBfmA4menu" .. AdvSuffix, MenuGroup, "Adversary A-4", BfmMenu, AdvA4, AdvQty)
-		-- BuildMenuCommands("SpawnBfm28menu" .. AdvSuffix, MenuGroup, "Adversary MiG-28", BfmMenu, Adv28, AdvQty)
-		-- BuildMenuCommands("SpawnBfm23menu" .. AdvSuffix, MenuGroup, "Adversary MiG-23", BfmMenu, Adv23, AdvQty)
-		-- BuildMenuCommands("SpawnBfm27menu" .. AdvSuffix, MenuGroup, "Adversary Su-27", BfmMenu, Adv27, AdvQty)
-		-- BuildMenuCommands("SpawnBfm16menu" .. AdvSuffix, MenuGroup, "Adversary F-16", BfmMenu, Adv16, AdvQty)
-		-- BuildMenuCommands("SpawnBfm18menu" .. AdvSuffix, MenuGroup, "Adversary F-18", BfmMenu, Adv18, AdvQty)		
-			
--- end
--- -- CLIENTS
--- BLUFOR = SET_GROUP:New():FilterCoalitions( "blue" ):FilterStart()
-
--- -- SPAWN AIR MENU
--- local SetClient = SET_CLIENT:New():FilterCoalitions("blue"):FilterStart() -- create a list of all clients
-
--- local function MENU()
-	-- SetClient:ForEachClient(function(client)
-		-- if (client ~= nil) and (client:IsAlive()) then 
+local function BFMACM_MENU()
+	SetClient:ForEachClient(function(client)
+		if (client ~= nil) and (client:IsAlive()) then 
  
-			-- local group = client:GetGroup()
-			-- local groupName = group:GetName()
+			local group = client:GetGroup()
+			local groupName = group:GetName()
 			
-			-- if group:IsPartlyOrCompletelyInZone(BfmAcmZoneMenu) then
-				-- if _G["SpawnBfm" .. groupName] == nil then
-					-- MenuGroup = group
-					-- --MenuGroupName = MenuGroup:GetName()
+			if group:IsPartlyOrCompletelyInZone(BfmAcmZoneMenu) then
+				MenuGroup = group
 
-					-- _G["SpawnBfm" .. groupName] = MENU_GROUP:New( MenuGroup, "AI BFM/ACM" )
-						-- BuildMenus(1, MenuGroup, "Single", _G["SpawnBfm" .. groupName])
-						-- BuildMenus(2, MenuGroup, "Pair", _G["SpawnBfm" .. groupName])
+				if _G["SpawnBfm" .. groupName] == nil then -- add BFM/ACM menus
+					MenuGroup = group
 
-					-- MESSAGE:New("You have entered the BFM/ACM zone.\nUse F10 menu to spawn adversaries."):ToGroup(group)
-					-- env.info("BFM/ACM entry Player name: " ..client:GetPlayerName())
-					-- env.info("BFM/ACM entry Group Name: " ..group:GetName())
-					-- --SetClient:Remove(client:GetName(), true)
-				-- end
-			-- elseif _G["SpawnBfm" .. groupName] ~= nil then
-				-- if group:IsNotInZone(BfmAcmZone) then
-					-- _G["SpawnBfm" .. groupName]:Remove()
-					-- _G["SpawnBfm" .. groupName] = nil
-					-- MESSAGE:New("You are outside the ACM/BFM zone."):ToGroup(group)
-					-- env.info("BFM/ACM exit Group Name: " ..group:GetName())
-				-- end
-			-- end
-		-- end
-	-- end)
--- timer.scheduleFunction(MENU,nil,timer.getTime() + 5)
--- end
+					_G["SpawnBfm" .. groupName] = MENU_GROUP:New( MenuGroup, "BFM", menuAcmBfmTop ) -- BFM Menus
+						BuildMenusBfmAcm(MenuGroup, "Single", _G["SpawnBfm" .. groupName], "BFM", 1)
+						BuildMenusBfmAcm(MenuGroup, "Pair", _G["SpawnBfm" .. groupName], "BFM", 1)
+					
+					_G["SpawnAcm" .. groupName] = MENU_GROUP:New( MenuGroup, "ACM", menuAcmBfmTop ) -- BFM Menus
+						BuildMenusBfmAcm(MenuGroup, "", _G["SpawnAcm" .. groupName], "ACM")
 
--- MENU()
+					--_G["ClearBfmAcm" .. groupName] = MENU_GROUP_COMMAND:New(MenuGroup, "Clear BFM/ACM spawns", menuAcmBfmTop, clearGroupSpawns, "ADVERSARY_" ) -- remove all BFM/ACM spawn groups
 
--- -- END ACM/BFM SECTION
+
+					MESSAGE:New("You have entered the BFM/ACM zone.\nUse F10 ACM/BFM menu to spawn adversaries."):ToGroup(group)
+					env.info("BFM/ACM entry Player name: " ..client:GetPlayerName())
+					env.info("BFM/ACM entry Group Name: " ..group:GetName())
+				end
+			elseif _G["SpawnBfm" .. groupName] ~= nil then
+			
+				if group:IsNotInZone(BfmAcmZone) then
+					_G["SpawnBfm" .. groupName]:Remove()
+					_G["SpawnBfm" .. groupName] = nil
+					_G["SpawnAcm" .. groupName]:Remove()
+					_G["SpawnAcm" .. groupName] = nil
+
+					MESSAGE:New("You are outside the ACM/BFM zone."):ToGroup(group)
+					env.info("BFM/ACM exit Group Name: " ..group:GetName())
+				end
+			end
+		end
+	end)
+timer.scheduleFunction(BFMACM_MENU,nil,timer.getTime() + 5)
+end
+
+BFMACM_MENU()
+
+-- END ACM/BFM SECTION
+
+
 
 
 -- ADMIN SECTION
-
-SetAdminClient = SET_CLIENT:New():FilterStart()
 
 local function restartMission()
 	trigger.action.setUserFlag("999", true)
@@ -469,11 +352,20 @@ local function BuildAdminMenu()
 	timer.scheduleFunction(BuildAdminMenu, nil, timer.getTime() + 10)
 end
 
-if JtfAdmin then
-	env.info("ADMIN enabled")
+if jtfAdmin then
+	env.info("JTF-1 ADMIN enabled")
+	SetAdminClient = SET_CLIENT:New():FilterStart()
 	BuildAdminMenu()
 end
 
+if jtfDebugMenu then
+	debugMenu = MENU_COALITION:New( coalition.side.BLUE, " DEBUG" )
+	MENU_COALITION_COMMAND:New(coalition.side.BLUE, "Restart Mission", debugMenu, restartMission )	
+end
+
 --END ADMIN SECTION
+
+
+
 
 env.info( '*** JTF-1 MOOSE MISSION SCRIPT END ***' )
