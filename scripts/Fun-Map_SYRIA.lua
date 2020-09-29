@@ -180,7 +180,7 @@ Range_YG44:Start()
 
 -- BEGIN ACM/BFM SECTION
 
-menuBfmAcmRemoveSpawns = MENU_COALITION_COMMAND:New(coalition.side.BLUE, "Clear all BFM/ACM spawns", menuAcmBfmTop, clearGroupSpawns, "ADVERSARY_" ) -- remove all BFM/ACM spawn groups
+menuBfmAcmRemoveSpawns = MENU_COALITION_COMMAND:New(coalition.side.BLUE, "Clear all BFM/ACM spawns", menuAcmBfmTop, clearGroupSpawns, "ADVERSARY_" ) -- menu command for removing all BFM/ACM spawn groups
 
 
 -- BFM/ACM Zones
@@ -189,7 +189,7 @@ BfmAcmZone = ZONE:FindByName("Zone_BfmAcmFox")
 
 -- MISSILE TRAINER
 -- Create a new missile trainer object.
-fox=FOX:New()
+fox = FOX:New()
 
 -- Add training zones.
 fox:AddSafeZone(Zone_BfmAcmFox)
@@ -211,9 +211,7 @@ Adv23 = SPAWN:New( "ADVERSARY_MiG23" )
 Adv16 = SPAWN:New( "ADVERSARY_F16" )
 Adv18 = SPAWN:New( "ADVERSARY_F18" )
 
--- will need to pass function caller (from menu) to each of these spawn functions.  
--- Then calculate spawn position/velocity relative to caller
-function SpawnAdvBfm(adv,qty,group,rng)
+function SpawnAdvBfm(adv,qty,group,rng) -- spawn BFM adversaries directly ahead of client. Type, number, requesting client group and range
 	range = rng * 1852
 	hdg = group:GetHeading()
 	pos = group:GetPointVec2()
@@ -223,7 +221,7 @@ function SpawnAdvBfm(adv,qty,group,rng)
 	MESSAGE:New("BFM Adversary spawned."):ToGroup(group)
 end
 
-function SpawnAdvAcm(adv,qty,group)
+function SpawnAdvAcm(adv,qty,group) -- spawn ACM adversaries in ACM spawn zone. Type, number and requesting client group
 	hdg = 80
 	zoneAcm = ZONE:FindByName("Zone_AcmSpawn")
 	adv:InitGrouping(qty):InitHeading(90):SpawnInZone( zoneAcm, false, 5000, 7500 )
@@ -231,7 +229,7 @@ function SpawnAdvAcm(adv,qty,group)
 end
 
 
-function BuildMenuCommandsBfmAcm (AdvMenu, MenuGroup, MenuName, ParentMenu, AdvType, EngType, AdvQty)
+function BuildMenuCommandsBfmAcm (AdvMenu, MenuGroup, MenuName, ParentMenu, AdvType, EngType, AdvQty) -- add BFM/ACM commands to client's F10 BFM and ACM sub-menus
 
 	if EngType == "ACM" then
 		_G[AdvMenu] = MENU_GROUP:New( MenuGroup, MenuName, ParentMenu)
@@ -246,7 +244,7 @@ function BuildMenuCommandsBfmAcm (AdvMenu, MenuGroup, MenuName, ParentMenu, AdvT
 	end
 end
 
-function BuildMenusBfmAcm(MenuGroup, MenuName, SpawnGroup, EngType, AdvQty)
+function BuildMenusBfmAcm(MenuGroup, MenuName, SpawnGroup, EngType, AdvQty) -- Add BFM and ACM sub-menus to client's BFM/ACM menu
 	
 	if EngType == "ACM" then
 		AdvSuffix = "_ACM"
@@ -265,16 +263,11 @@ function BuildMenusBfmAcm(MenuGroup, MenuName, SpawnGroup, EngType, AdvQty)
 
 end
 
-function BuildMenuCommandsAcm ()
+-- BLUFOR = SET_GROUP:New():FilterCoalitions( "blue" ):FilterStart() -- create list of all blue group objects
 
-end
--- CLIENTS
-BLUFOR = SET_GROUP:New():FilterCoalitions( "blue" ):FilterStart()
-
--- SPAWN AIR MENU
 local SetClient = SET_CLIENT:New():FilterCoalitions("blue"):FilterStart() -- create a list of all clients
 
-local function BFMACM_MENU()
+local function BFMACM_MENU() -- add/remove menus for BFM/ACM if clients enter/exit BFM/ACM zone
 	SetClient:ForEachClient(function(client)
 		if (client ~= nil) and (client:IsAlive()) then 
  
@@ -284,7 +277,7 @@ local function BFMACM_MENU()
 			if group:IsPartlyOrCompletelyInZone(BfmAcmZoneMenu) then
 				MenuGroup = group
 
-				if _G["SpawnBfm" .. groupName] == nil then -- add BFM/ACM menus
+				if _G["SpawnBfm" .. groupName] == nil then -- add BFM/ACM menus if they aren't active
 					MenuGroup = group
 
 					_G["SpawnBfm" .. groupName] = MENU_GROUP:New( MenuGroup, "BFM", menuAcmBfmTop ) -- BFM Menus
@@ -301,7 +294,7 @@ local function BFMACM_MENU()
 					env.info("BFM/ACM entry Player name: " ..client:GetPlayerName())
 					env.info("BFM/ACM entry Group Name: " ..group:GetName())
 				end
-			elseif _G["SpawnBfm" .. groupName] ~= nil then
+			elseif _G["SpawnBfm" .. groupName] ~= nil then -- remove BFM/ACM menus if active and group leaves BFM/ACM zone
 			
 				if group:IsNotInZone(BfmAcmZone) then
 					_G["SpawnBfm" .. groupName]:Remove()
@@ -315,10 +308,9 @@ local function BFMACM_MENU()
 			end
 		end
 	end)
-timer.scheduleFunction(BFMACM_MENU,nil,timer.getTime() + 5)
 end
 
-BFMACM_MENU()
+timer.scheduleFunction(BFMACM_MENU,nil,timer.getTime() + 5) -- add scheduled call to check for clients in BFM/ACM zone and add/remove menus as required
 
 -- END ACM/BFM SECTION
 
