@@ -319,7 +319,12 @@ timer.scheduleFunction(BFMACM_MENU,nil,timer.getTime() + 5) -- add scheduled cal
 
 -- ADMIN SECTION
 
-local function restartMission()
+SetAdminClient = SET_CLIENT:New():FilterStart()
+
+local function adminRestartMission(adminClientName)
+	if adminClientName then
+		env.info("ADMIN Restart player name: " ..adminClientName)
+	end
 	trigger.action.setUserFlag("999", true)
 end
 
@@ -330,13 +335,10 @@ local function BuildAdminMenu()
 			adminGroup = client:GetGroup()
 			adminGroupName = adminGroup:GetName()
 
-			env.info("ADMIN Player name: " ..client:GetPlayerName())
-			env.info("ADMIN Group Name: " ..adminGroupName)
-
-			
 			if string.find(adminGroupName, "XX_ADMIN") then
 				adminMenu = MENU_GROUP:New(adminGroup, "ADMIN")
-				MENU_GROUP_COMMAND:New(adminGroup, "Restart Mission", adminMenu, restartMission )
+				MENU_GROUP_COMMAND:New(adminGroup, "Restart Mission", adminMenu, adminRestartMission, client:GetPlayerName() )
+				env.info("ADMIN Player name: " ..client:GetPlayerName())
 			end
 		SetAdminClient:Remove(client:GetName(), true)
 		end
@@ -344,15 +346,14 @@ local function BuildAdminMenu()
 	timer.scheduleFunction(BuildAdminMenu, nil, timer.getTime() + 10)
 end
 
-if jtfAdmin then
-	env.info("JTF-1 ADMIN enabled")
-	SetAdminClient = SET_CLIENT:New():FilterStart()
+if JtfAdmin then
+	env.info("ADMIN enabled")
 	BuildAdminMenu()
 end
 
 if jtfDebugMenu then
 	debugMenu = MENU_COALITION:New( coalition.side.BLUE, " DEBUG" )
-	MENU_COALITION_COMMAND:New(coalition.side.BLUE, "Restart Mission", debugMenu, restartMission )	
+	MENU_COALITION_COMMAND:New(coalition.side.BLUE, "Restart Mission", debugMenu, adminRestartMission )	
 end
 
 --END ADMIN SECTION
